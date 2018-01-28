@@ -31,6 +31,7 @@ var values;
 var visible_values;
 
 var cycle_time;
+var cur_freq;
 
 var started;
 
@@ -45,19 +46,19 @@ function init_funcs () {
     cur_func = 0;
     
     funcs.push (function (t) {
-        return sin(t * TAU);
+        return sin(t * TAU * 3);
     })
     
     func_names.push ("sine.png");
     
     funcs.push (function (t) {
-        return 2 * (2*t - floor(2*t)) - 1;
+        return 2 * (3*t - floor(3*t)) - 1;
     })
     
     func_names.push ("saw.png");
     
     funcs.push (function (t) {
-        if (t - floor(t) < 0.5) {
+        if (3*t - floor(3*t) < 0.5) {
             return 1;
         }
         else return -1;
@@ -115,6 +116,7 @@ function reset_anim () {
     fourier_imag = [];
     fourier_freq = [];
     cycle_time = samples;
+    freq = 1;
 }
 
 function init_visible () {
@@ -143,9 +145,6 @@ function update_values () {
     }
 }
 
-function get_value (x) {
-    return sin(x * PI);
-}
 
 function setup () {
     createCanvas (screen_width, screen_height);
@@ -167,6 +166,7 @@ function setup () {
     fourier_imag = [];
     
     start = false;
+    freq = 1.0;
 }
 
 
@@ -187,8 +187,10 @@ function draw () {
     
     line(0, 0, 0, half_height); /* Y */
     
-    if (started && cycle_time > samples / max_freq) 
-        cycle_time -= 64;
+    if (started && freq < max_freq) {
+        freq += 0.1;
+        cycle_time = samples / freq;
+    }
     
     /* Function */
     var int_x = 0;
@@ -198,6 +200,7 @@ function draw () {
     var last_b_scale = threequarter_height;
     var last_c_scale = threequarter_height;
     
+    /* Plot of fourier transform */
     for (var i = 0; i < fourier_freq.length; i ++) {
         var a = (fourier_freq[i] - 1) * half_width / max_freq; 
         var b = fourier_real[i] / 8;
