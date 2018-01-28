@@ -1,0 +1,9 @@
+<svg transform="rotate(270 0,0)" xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="#ffcc00" stroke="#ffcc00">
+   <line x1="30" y1="30" x2="98" y2="64" fill="inherit" stroke="inherit" stroke-width="20" stroke-linecap="round">
+</line>
+<line x1="30" y1="98" x2="98" y2="64" fill="inherit" stroke="#inherit" stroke-width="20" stroke-linecap="round">
+</line>
+<line x1="30" y1="30" x2="30" y2="98" fill="inherit" stroke="inherit" stroke-width="20" stroke-linecap="inherit">
+</line>
+<polygon points="30,30 98,64 30,98" fill="inherit" stroke="inherit"></polygon>
+</svg>
